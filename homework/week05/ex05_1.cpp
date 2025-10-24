@@ -1,0 +1,18 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int a[5];
+	for (int i = 0; i < 5; i++)
+	{
+		a[i] = 5 - i;
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		cout << "a[" << i << "] = " << a[i] << '\n';
+	}
+
+	return 0;
+}
