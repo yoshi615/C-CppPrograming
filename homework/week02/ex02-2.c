@@ -1,4 +1,4 @@
-#include <stdio.h> // C言語の標準入出力ライブラリ
+#include <stdio.h>
 int main() {
  float x;
 double y;
