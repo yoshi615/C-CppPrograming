@@ -1,0 +1,14 @@
+[
+{
+  "directory": "C:/Users/yoshi/OneDrive/デスクトップ/autumn/C-CppPrograming/build",
+  "command": "C:\\tools\\mingw64\\bin\\g++.exe   -g -std=gnu++17 -o CMakeFiles\\ex10_2.dir\\ex10_2.cpp.obj -c C:\\Users\\yoshi\\OneDrive\\デスクトップ\\autumn\\C-CppPrograming\\homework\\week10\\ex10_2.cpp",
+  "file": "C:/Users/yoshi/OneDrive/デスクトップ/autumn/C-CppPrograming/homework/week10/ex10_2.cpp",
+  "output": "CMakeFiles/ex10_2.dir/ex10_2.cpp.obj"
+},
+{
+  "directory": "C:/Users/yoshi/OneDrive/デスクトップ/autumn/C-CppPrograming/build",
+  "command": "C:\\tools\\mingw64\\bin\\g++.exe   -g -std=gnu++17 -o CMakeFiles\\ex10_2.dir\\Account.cpp.obj -c C:\\Users\\yoshi\\OneDrive\\デスクトップ\\autumn\\C-CppPrograming\\homework\\week10\\Account.cpp",
+  "file": "C:/Users/yoshi/OneDrive/デスクトップ/autumn/C-CppPrograming/homework/week10/Account.cpp",
+  "output": "CMakeFiles/ex10_2.dir/Account.cpp.obj"
+}
+]

@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "myapp",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ex10_2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ex10_2-Debug-786b31f73bf4ada75009.json",
+					"name" : "ex10_2",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/yoshi/OneDrive/\u30c7\u30b9\u30af\u30c8\u30c3\u30d7/autumn/C-CppPrograming/build",
+		"source" : "C:/Users/yoshi/OneDrive/\u30c7\u30b9\u30af\u30c8\u30c3\u30d7/autumn/C-CppPrograming/homework/week10"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 8
+	}
+}
