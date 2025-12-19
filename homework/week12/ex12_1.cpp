@@ -1,84 +1,117 @@
 #include <iostream>
-#include <algorithm>
 
-class Point
-{
-public:
-    float x;
-    float y;
-
-    Point() : x(0.0f), y(0.0f) {}
-    Point(float x, float y) : x(x), y(y) {}
-};
-
-class Rectangle
+class FloatArray
 {
 private:
-    // 常に pt1: 左下の頂点, pt2: 右上の頂点 になるように保持する
-    Point pt1; // 左下
-    Point pt2; // 右上
+    int size;
+    float *data;
+
 public:
-    // デフォルトコンストラクタ：pt1(0,0), pt2(1,1)
-    Rectangle() : pt1(0.0f, 0.0f), pt2(1.0f, 1.0f) {}
-
-    // 引数付きコンストラクタ
-    // 注意: p1, p2 の位置関係に関わらず、pt1=左下, pt2=右上 になるよう正規化
-    Rectangle(const Point &p1, const Point &p2)
+    // コンストラクタ：要素数 n の配列を確保し、0.0f で初期化
+    FloatArray(int n = 0)
+        : size(n), data(nullptr)
     {
-        pt1.x = std::min(p1.x, p2.x);
-        pt1.y = std::min(p1.y, p2.y);
-        pt2.x = std::max(p1.x, p2.x);
-        pt2.y = std::max(p1.y, p2.y);
-    }
-
-    // 面積
-    float area() const
-    {
-        return (pt2.x - pt1.x) * (pt2.y - pt1.y);
-    }
-
-    // 周長
-    float perimeter() const
-    {
-        return 2.0f * ((pt2.x - pt1.x) + (pt2.y - pt1.y));
-    }
-
-    // 挿入演算子 <<
-    friend std::ostream& operator<<(std::ostream &os, const Rectangle &r)
-    {
-        os << "[(" << r.pt1.x << ", " << r.pt1.y << "), ("
-           << r.pt2.x << ", " << r.pt2.y << ")], area = " << r.area();
-        return os;
-    }
-
-    // 抽出演算子 >>
-    // 入力形式：x1 y1 x2 y2
-    friend std::istream& operator>>(std::istream &is, Rectangle &r)
-    {
-        float x1, y1, x2, y2;
-        if (is >> x1 >> y1 >> x2 >> y2)
-        {
-            r.pt1.x = std::min(x1, x2);
-            r.pt1.y = std::min(y1, y2);
-            r.pt2.x = std::max(x1, x2);
-            r.pt2.y = std::max(y1, y2);
+        if (n > 0) {
+            data = new float[n];
+            for (int i = 0; i < n; ++i)
+                data[i] = 0.0f;
         }
-        return is;
+    }
+
+    // コピーコンストラクタ
+    FloatArray(const FloatArray& x)
+       : size(x.size), data(nullptr)
+    {
+        if (x.size > 0) {
+            data = new float[x.size];
+            for (int i = 0; i < x.size; ++i)
+                data[i] = x.data[i];
+        }
+    }
+
+    // デストラクタ：確保した動的配列を解放
+    ~FloatArray() 
+    {
+        delete[] data;
+    }
+
+    // 配列の要素数を返す
+    int length() const 
+    {
+        return size;
+    }
+
+    // 添字演算子
+    float &operator[](int index)
+    {
+        return data[index];
+    }
+ 
+    // 代入演算子 =
+    FloatArray &operator=(const FloatArray &x)
+    {
+        if (this == &x) return *this;
+        
+        delete[] data;
+        size = x.size;
+        if (x.size > 0) {
+            data = new float[x.size];
+            for (int i = 0; i < x.size; ++i)
+                data[i] = x.data[i];
+        } else {
+            data = nullptr;
+        }
+        return *this;
+    }
+
+    // 配列 + スカラ（各要素に value を加えた新しい配列を返す）
+    FloatArray operator+(float value) const
+    {
+        FloatArray result(size);
+        for (int i = 0; i < size; ++i)
+            result.data[i] = data[i] + value;
+        return result;
+    }
+
+    // 配列 + 配列（要素ごとの和）
+    FloatArray operator+(const FloatArray &x) const
+    {
+        FloatArray result(size);
+        for (int i = 0; i < size; ++i)
+            result.data[i] = data[i] + x.data[i];
+        return result;
+    }
+
+    // 挿入演算子 << のオーバーロード
+    friend std::ostream &operator<<(std::ostream &os, const FloatArray &a)
+    {
+        os << "[";
+        for (int i = 0; i < a.size; ++i) {
+            os << a.data[i];
+            if (i < a.size - 1) os << ", ";
+        }
+        os << "]";
+        return os;
     }
 };
 
 // 動作確認用 main、この部分は変更しないでください
+using namespace std;
 int main()
 {
-    using namespace std;
-    Rectangle r1;
-    Rectangle r2(Point(3.0f, 2.0f), Point(0.6f, 0.5f));
+    // 要素数 5 の配列を作成
+    FloatArray a(5);
+    for (int i = 0; i < a.length(); ++i)
+        a[i] = i * 0.3f; 
+    cout << "a = " << a << endl;
 
-    Rectangle r3;
-    cout << "矩形の座標を、x1 y1 x2 y2 の形式で入力してください：" ;
-    cin >> r3;
+    FloatArray b, c;
 
-    cout << "r1 = " << r1 << "\n";
-    cout << "r2 = " << r2 << "\n";
-    cout << "r3 = " << r3 << "\n";
+    // 配列 + スカラのテスト
+    b = a + 2.0f; // 各要素に 2.0 を加える
+    cout << "b = " << b << endl;
+
+    // 配列 + 配列のテスト
+    c = a + b;
+    cout << "c = " << c << endl;
 }
